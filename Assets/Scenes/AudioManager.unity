@@ -313,6 +313,30 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 1
+  - name: Levels
+    clip: {fileID: 8300000, guid: 311cfee2c6ee44c35815a72015062897, type: 3}
+    volume: 0.49
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Lose
+    clip: {fileID: 8300000, guid: 14817ea9dc36645ae99eb73a4e514cd4, type: 3}
+    volume: 0.49
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Win
+    clip: {fileID: 8300000, guid: 63cb5609c277742f78ea958be93a85f9, type: 3}
+    volume: 0.49
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Ghost
+    clip: {fileID: 8300000, guid: 42d4df231653b4672afae8d889d5c00a, type: 3}
+    volume: 0.49
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
