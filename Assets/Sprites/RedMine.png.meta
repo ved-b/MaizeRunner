@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RedMine_0: 8250157587147991992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
