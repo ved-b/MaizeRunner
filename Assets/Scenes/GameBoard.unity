@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 5098233240433769473, guid: beb3eab71bed04aac808a253b45dc713, type: 3}
   gameHolder: {fileID: 1421730956}
+  difficulty: 2
 --- !u!4 &818018048
 Transform:
   m_ObjectHideFlags: 0
