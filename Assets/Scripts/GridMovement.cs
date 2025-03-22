@@ -12,26 +12,34 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private Sprite[] downSprites;
     [SerializeField] private Sprite[] leftSprites;
     [SerializeField] private Sprite[] rightSprites;
-    [SerializeField] private float frameRate = 0.1f; // Seconds per frame
+    [SerializeField] private Sprite[] upDeathSprites;
+    [SerializeField] private Sprite[] downDeathSprites;
+    [SerializeField] private Sprite[] leftDeathSprites;
+    [SerializeField] private Sprite[] rightDeathSprites;
+    [SerializeField] private float frameRate = 0.1f;
+    [SerializeField] private float deathFrameRate = 0.1f;
 
     private bool isMoving = false;
+    private bool isDead = false;
     private SpriteRenderer spriteRenderer;
     private Sprite[] currentSprites;
     private int currentFrame = 0;
     private float animationTimer = 0f;
+    private Vector2 facingDirection = Vector2.down;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentSprites = downSprites;
+        facingDirection = Vector2.down;
         if (currentSprites.Length > 0)
-        {
             spriteRenderer.sprite = currentSprites[0];
-        }
     }
 
     private void Update()
     {
+        if (isDead)
+            return;
         animationTimer += Time.deltaTime;
         if (animationTimer >= frameRate && currentSprites.Length > 0)
         {
@@ -43,47 +51,48 @@ public class GridMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                facingDirection = Vector2.up;
                 currentSprites = upSprites;
                 ResetAnimation();
                 TryMove(Vector2.up);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                facingDirection = Vector2.down;
                 currentSprites = downSprites;
                 ResetAnimation();
                 TryMove(Vector2.down);
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                facingDirection = Vector2.left;
                 currentSprites = leftSprites;
                 ResetAnimation();
                 TryMove(Vector2.left);
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                facingDirection = Vector2.right;
                 currentSprites = rightSprites;
                 ResetAnimation();
                 TryMove(Vector2.right);
             }
         }
     }
-    
+
     private void TryMove(Vector2 direction)
     {
         Vector2 targetPosition = (Vector2)transform.position + direction * gridSize;
         if (IsValidPosition(targetPosition))
-        {
             StartCoroutine(MovePlayer(direction));
-        }
     }
-    
+
     private bool IsValidPosition(Vector2 position)
     {
         float minX = gridOrigin.x;
         float maxX = gridOrigin.x + (gridWidth - 1) * gridSize;
         float minY = gridOrigin.y;
         float maxY = gridOrigin.y + (gridHeight - 1) * gridSize;
-        
         return (position.x >= minX && position.x <= maxX &&
                 position.y >= minY && position.y <= maxY);
     }
@@ -94,7 +103,6 @@ public class GridMovement : MonoBehaviour
         Vector2 startPosition = transform.position;
         Vector2 endPosition = startPosition + direction * gridSize;
         float elapsedTime = 0f;
-
         while (elapsedTime < moveDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -102,19 +110,41 @@ public class GridMovement : MonoBehaviour
             transform.position = Vector2.Lerp(startPosition, endPosition, percentage);
             yield return null;
         }
-
         transform.position = endPosition;
         isMoving = false;
         ResetAnimation();
     }
-    
+
     private void ResetAnimation()
     {
         currentFrame = 0;
         animationTimer = 0f;
         if (currentSprites.Length > 0)
-        {
             spriteRenderer.sprite = currentSprites[0];
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        StopAllCoroutines();
+        StartCoroutine(PlayDeathAnimation());
+    }
+
+    private IEnumerator PlayDeathAnimation()
+    {
+        Sprite[] selectedDeathSprites = downDeathSprites;
+        if (facingDirection == Vector2.up)
+            selectedDeathSprites = upDeathSprites;
+        else if (facingDirection == Vector2.down)
+            selectedDeathSprites = downDeathSprites;
+        else if (facingDirection == Vector2.left)
+            selectedDeathSprites = leftDeathSprites;
+        else if (facingDirection == Vector2.right)
+            selectedDeathSprites = rightDeathSprites;
+        for (int i = 0; i < selectedDeathSprites.Length; i++)
+        {
+            spriteRenderer.sprite = selectedDeathSprites[i];
+            yield return new WaitForSeconds(deathFrameRate);
         }
     }
 }
