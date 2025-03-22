@@ -42,7 +42,7 @@ public class GridMovement : MonoBehaviour
         }
         if (!isMoving)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
                 if (facingDirection != Vector2.up)
                 {
@@ -55,7 +55,7 @@ public class GridMovement : MonoBehaviour
                     TryMove(Vector2.up);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
                 if (facingDirection != Vector2.down)
                 {
@@ -68,7 +68,7 @@ public class GridMovement : MonoBehaviour
                     TryMove(Vector2.down);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 if (facingDirection != Vector2.left)
                 {
@@ -81,7 +81,7 @@ public class GridMovement : MonoBehaviour
                     TryMove(Vector2.left);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
                 if (facingDirection != Vector2.right)
                 {
