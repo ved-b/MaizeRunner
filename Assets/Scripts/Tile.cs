@@ -45,6 +45,7 @@ public class Tile : MonoBehaviour
             active = false;
             if (isMine) {
                 spriteRenderer.sprite = mineHitTile;
+                gameManager.GameOver();
             } else {
                 spriteRenderer.sprite = clickedTiles[mineCount];
                 if (mineCount == 0) {

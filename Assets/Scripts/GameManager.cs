@@ -311,4 +311,9 @@ public class GameManager : MonoBehaviour
             tiles[pos].ClickedTile();
         }
     }
+
+    public void GameOver(){
+        RevealAllTiles();
+        Debug.Log("Game Over");
+    }
 }
