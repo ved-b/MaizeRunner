@@ -5,12 +5,12 @@ public class Test : MonoBehaviour
     void Start()
     {
         // Check if the AudioManager singleton instance is assigned
-        if (AudioManager.instance != null)
+        if (AudioManager.Instance != null)
         {
             // Log a message to the console
-            Debug.Log("AudioManager singleton instance is working: " + AudioManager.instance);
+            Debug.Log("AudioManager singleton instance is working: " + AudioManager.Instance);
             // Test playing a sound (e.g., "Background")
-            AudioManager.instance.Play("Background");
+            AudioManager.Instance.Play("Background");
         }
         else
         {
