@@ -3,7 +3,7 @@ using DG.Tweening;
 public class CameraShake : SingletonMonoBehavior<CameraShake>
 {
     
-        public static void Shake(float duration, float strength)
+        public void Shake(float duration, float strength)
         {
             Instance.OnShake(duration, strength);
         }

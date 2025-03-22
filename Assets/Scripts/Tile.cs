@@ -45,6 +45,7 @@ public class Tile : MonoBehaviour
             active = false;
             if (isMine) {
                 spriteRenderer.sprite = mineHitTile;
+                CameraShake.Instance.Shake(2f, 1f);
                 GridMovement gm = GameObject.FindWithTag("Player").GetComponent<GridMovement>();
                 if (gm != null){
                     gm.Die();
