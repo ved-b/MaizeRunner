@@ -11,6 +11,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private Sprite mineWrongTile;
     [SerializeField] private Sprite mineHitTile;
 
+    [Header("GM set via code")]
+    public GameManager gameManager;
+
     private SpriteRenderer spriteRenderer;
     public bool flagged = false;
     public bool active = true;
@@ -42,8 +45,12 @@ public class Tile : MonoBehaviour
             active = false;
             if (isMine) {
                 spriteRenderer.sprite = mineHitTile;
+                gameManager.GameOver();
             } else {
                 spriteRenderer.sprite = clickedTiles[mineCount];
+                if (mineCount == 0) {
+                    gameManager.ClickNeighbours(this);
+                }
             }
         }
     }
