@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class GridMovement : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private Sprite[] rightDeathSprites;
     [SerializeField] private float frameRate = 0.1f;
     [SerializeField] private float deathFrameRate = 0.1f;
+    [SerializeField] private float moveDistance = 0.2f;
 
     private bool isMoving = false;
     private bool isDead = false;
@@ -156,6 +158,18 @@ public class GridMovement : MonoBehaviour
 
     private IEnumerator PlayDeathAnimation()
     {
+        Vector3 offset = Vector3.zero;
+        if (facingDirection == Vector2.up)
+            offset = new Vector3(0f, -moveDistance, 0f);
+        else if (facingDirection == Vector2.down)
+            offset = new Vector3(0f, moveDistance, 0f);
+        else if (facingDirection == Vector2.left)
+            offset = new Vector3(moveDistance, 0f, 0f);
+        else if (facingDirection == Vector2.right)
+            offset = new Vector3(-moveDistance, 0f, 0f);
+
+        transform.DOMove(transform.position + offset, moveDuration);
+
         Sprite[] selectedDeathSprites = downDeathSprites;
         if (facingDirection == Vector2.up)
             selectedDeathSprites = upDeathSprites;
@@ -165,6 +179,7 @@ public class GridMovement : MonoBehaviour
             selectedDeathSprites = leftDeathSprites;
         else if (facingDirection == Vector2.right)
             selectedDeathSprites = rightDeathSprites;
+
         for (int i = 0; i < selectedDeathSprites.Length; i++)
         {
             spriteRenderer.sprite = selectedDeathSprites[i];
