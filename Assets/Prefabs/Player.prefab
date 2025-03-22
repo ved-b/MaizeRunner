@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 852189623061499939}
   - component: {fileID: 202902359934678209}
   - component: {fileID: 1735518396120517664}
+  - component: {fileID: 4797899678286146600}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6918161491188061657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: -3, z: 0}
+  m_LocalPosition: {x: -4.5, y: 4.5, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -102,9 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDuration: 0.3
   gridSize: 1
-  gridWidth: 16
-  gridHeight: 8
-  gridOrigin: {x: -7, y: -3}
+  gridWidth: 10
+  gridHeight: 10
+  gridOrigin: {x: -4.5, y: -4.5}
   upSprites:
   - {fileID: 220715021686296392, guid: a368fd85228504af4bfd22ce6641c158, type: 3}
   - {fileID: -2755115915799340917, guid: 693147fd1b1584bf097c6961a0a758ed, type: 3}
@@ -130,3 +131,49 @@ MonoBehaviour:
   - {fileID: -3646633947265929579, guid: 04198ba2b0710452d9e4ea51402a8628, type: 3}
   - {fileID: -873183471929879148, guid: 0633c339c912b479b9b4d126478c6e68, type: 3}
   frameRate: 0.1
+--- !u!61 &4797899678286146600
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6918161491188061657}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
