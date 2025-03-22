@@ -49,33 +49,57 @@ public class GridMovement : MonoBehaviour
         }
         if (!isMoving)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                facingDirection = Vector2.up;
-                currentSprites = upSprites;
-                ResetAnimation();
-                TryMove(Vector2.up);
+                if (facingDirection != Vector2.up)
+                {
+                    facingDirection = Vector2.up;
+                    currentSprites = upSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.up);
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                facingDirection = Vector2.down;
-                currentSprites = downSprites;
-                ResetAnimation();
-                TryMove(Vector2.down);
+                if (facingDirection != Vector2.down)
+                {
+                    facingDirection = Vector2.down;
+                    currentSprites = downSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.down);
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
-                facingDirection = Vector2.left;
-                currentSprites = leftSprites;
-                ResetAnimation();
-                TryMove(Vector2.left);
+                if (facingDirection != Vector2.left)
+                {
+                    facingDirection = Vector2.left;
+                    currentSprites = leftSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.left);
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                facingDirection = Vector2.right;
-                currentSprites = rightSprites;
-                ResetAnimation();
-                TryMove(Vector2.right);
+                if (facingDirection != Vector2.right)
+                {
+                    facingDirection = Vector2.right;
+                    currentSprites = rightSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.right);
+                }
             }
         }
     }
