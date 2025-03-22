@@ -130,7 +130,32 @@ MonoBehaviour:
   - {fileID: -8691776367246188034, guid: 3914673b333204a0abb5cdf5e366eb51, type: 3}
   - {fileID: -3646633947265929579, guid: 04198ba2b0710452d9e4ea51402a8628, type: 3}
   - {fileID: -873183471929879148, guid: 0633c339c912b479b9b4d126478c6e68, type: 3}
+  upDeathSprites:
+  - {fileID: 220715021686296392, guid: 5070f53058d3d4138bee7f864ae40db2, type: 3}
+  - {fileID: -2755115915799340917, guid: 606ac11da5d3348da97288ddf4ed48f9, type: 3}
+  - {fileID: -8691776367246188034, guid: a956d06baf6f24e288abdbbb1a7f0ab1, type: 3}
+  - {fileID: -3646633947265929579, guid: c0d4dcb67c8b449bc83a159a35270ab4, type: 3}
+  - {fileID: -873183471929879148, guid: 107c36d7f93e94d5ebcb4b934bc1d985, type: 3}
+  downDeathSprites:
+  - {fileID: 220715021686296392, guid: 715ddbab6b84f455f9e0cc8fbd822f85, type: 3}
+  - {fileID: -2755115915799340917, guid: 067fda85928ac40e393bdd5a378b518f, type: 3}
+  - {fileID: -8691776367246188034, guid: 53eb0977dbeee44beb6dbe2620f02331, type: 3}
+  - {fileID: -3646633947265929579, guid: 1000d5eeea3f1450496e35ecc1d7100c, type: 3}
+  - {fileID: -873183471929879148, guid: 37763f29c56ca4ae28ce6f080095e4e3, type: 3}
+  leftDeathSprites:
+  - {fileID: 220715021686296392, guid: 066a270c497bb4221a4adfe93a20746b, type: 3}
+  - {fileID: -2755115915799340917, guid: c034127789fdb49afbe05c7f8af0cc27, type: 3}
+  - {fileID: -8691776367246188034, guid: 67d28c11d581d45faa279f8c258310b8, type: 3}
+  - {fileID: -3646633947265929579, guid: 3e65a919882c94d06a741045b26c768e, type: 3}
+  - {fileID: -873183471929879148, guid: 78e30874a297249bb8c95bfc43ae0746, type: 3}
+  rightDeathSprites:
+  - {fileID: 220715021686296392, guid: 312131be5d12544b89de3a43fd3464c7, type: 3}
+  - {fileID: -2755115915799340917, guid: bc4e07036b32d429f8c51629c8300f3c, type: 3}
+  - {fileID: -8691776367246188034, guid: 7d0fa708d327e40949366933e5f663dd, type: 3}
+  - {fileID: -3646633947265929579, guid: 6b93cb35facf140e29feb6e3fb834257, type: 3}
+  - {fileID: -873183471929879148, guid: 942aeb415778b4298872bd289a89f5b8, type: 3}
   frameRate: 0.1
+  deathFrameRate: 0.1
 --- !u!61 &4797899678286146600
 BoxCollider2D:
   m_ObjectHideFlags: 0
