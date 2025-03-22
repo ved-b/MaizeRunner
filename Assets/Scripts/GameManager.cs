@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
 
     void Start(){
         // Example: 9x9 board with 10 mines
-        CreateGameBoard(5, 5, 5);
+        CreateGameBoard(24, 20, 80);
         ResetGameState();
-        //RevealAllTiles();
+        RevealAllTiles();
     }
 
     public void CreateGameBoard(int width, int height, int numMines){
@@ -50,34 +50,53 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetGameState(){
-        int tilesCount = tiles.Count;
+private void ResetGameState(){
+    int tilesCount = tiles.Count;
 
-        // --- Enforce Heuristic 2: Safe start area ---
-        // The bottom left tile (index 0) and its 8 neighbours must be safe.
-        List<int> safeZone = new List<int>();
-        safeZone.Add(0);
-        safeZone.AddRange(GetNeighbours(0)); // Using 8-directional neighbours
+    // --- Enforce Heuristic: Safe corners ---
+    // All four corners and their surrounding tiles must be safe
+    List<int> safeZone = new List<int>();
+    
+    // Bottom-left corner (index 0)
+    safeZone.Add(0);
+    safeZone.AddRange(GetNeighbours(0));
+    
+    // Bottom-right corner (index width-1)
+    safeZone.Add(width - 1);
+    safeZone.AddRange(GetNeighbours(width - 1));
+    
+    // Top-left corner (index (height-1)*width)
+    int topLeftIndex = (height - 1) * width;
+    safeZone.Add(topLeftIndex);
+    safeZone.AddRange(GetNeighbours(topLeftIndex));
+    
+    // Top-right corner (index (height*width)-1)
+    int topRightIndex = (height * width) - 1;
+    safeZone.Add(topRightIndex);
+    safeZone.AddRange(GetNeighbours(topRightIndex));
+    
+    // Remove any duplicates from the safe zone
+    safeZone = safeZone.Distinct().ToList();
 
-        // Candidate indices: exclude the safe zone.
-        List<int> candidateIndices = new List<int>();
-        for (int i = 0; i < tilesCount; i++){
-            if (!safeZone.Contains(i))
-                candidateIndices.Add(i);
-        }
+    // Candidate indices: exclude the safe zone.
+    List<int> candidateIndices = new List<int>();
+    for (int i = 0; i < tilesCount; i++){
+        if (!safeZone.Contains(i))
+            candidateIndices.Add(i);
+    }
 
-        // Clear any previous mine placements.
-        for (int i = 0; i < tilesCount; i++){
-            tiles[i].isMine = false;
-        }
+    // Clear any previous mine placements.
+    for (int i = 0; i < tilesCount; i++){
+        tiles[i].isMine = false;
+    }
 
-        // Place mines randomly among candidate indices.
-        var initialMinePositions = candidateIndices.OrderBy(x => Random.value)
-                                                   .Take(numMines)
-                                                   .ToList();
-        foreach (int pos in initialMinePositions){
-            tiles[pos].isMine = true;
-        }
+    // Place mines randomly among candidate indices.
+    var initialMinePositions = candidateIndices.OrderBy(x => Random.value)
+                                               .Take(numMines)
+                                               .ToList();
+    foreach (int pos in initialMinePositions){
+        tiles[pos].isMine = true;
+    }
         UpdateMineCounts();
 
         // Set allowed type-3 tile count based on difficulty.
