@@ -12,13 +12,14 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private Sprite[] downSprites;
     [SerializeField] private Sprite[] leftSprites;
     [SerializeField] private Sprite[] rightSprites;
-    [SerializeField] private float frameRate = 0.1f; // Seconds per frame
+    [SerializeField] private float frameRate = 0.1f;
 
     private bool isMoving = false;
     private SpriteRenderer spriteRenderer;
     private Sprite[] currentSprites;
     private int currentFrame = 0;
     private float animationTimer = 0f;
+    private Vector2 facingDirection = Vector2.down;
 
     private void Awake()
     {
@@ -43,27 +44,55 @@ public class GridMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                currentSprites = upSprites;
-                ResetAnimation();
-                TryMove(Vector2.up);
+                if (facingDirection != Vector2.up)
+                {
+                    facingDirection = Vector2.up;
+                    currentSprites = upSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.up);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                currentSprites = downSprites;
-                ResetAnimation();
-                TryMove(Vector2.down);
+                if (facingDirection != Vector2.down)
+                {
+                    facingDirection = Vector2.down;
+                    currentSprites = downSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.down);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                currentSprites = leftSprites;
-                ResetAnimation();
-                TryMove(Vector2.left);
+                if (facingDirection != Vector2.left)
+                {
+                    facingDirection = Vector2.left;
+                    currentSprites = leftSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.left);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                currentSprites = rightSprites;
-                ResetAnimation();
-                TryMove(Vector2.right);
+                if (facingDirection != Vector2.right)
+                {
+                    facingDirection = Vector2.right;
+                    currentSprites = rightSprites;
+                    ResetAnimation();
+                }
+                else
+                {
+                    TryMove(Vector2.right);
+                }
             }
         }
     }
@@ -83,7 +112,6 @@ public class GridMovement : MonoBehaviour
         float maxX = gridOrigin.x + (gridWidth - 1) * gridSize;
         float minY = gridOrigin.y;
         float maxY = gridOrigin.y + (gridHeight - 1) * gridSize;
-        
         return (position.x >= minX && position.x <= maxX &&
                 position.y >= minY && position.y <= maxY);
     }
