@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 29e3dc8b3da0746cb9b8412d4f34534e
+guid: 571bb20403e868f4aa7d2c6c849b2705
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2219422886029529778
-    second: Unclicked Tile_0
+      213: 2539654400972337865
+    second: Corn Stalks With Flag_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Unclicked Tile_0
+      name: Corn Stalks With Flag_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4d66d7e4a60331e0800000000000000
-      internalID: -2219422886029529778
+      spriteID: 9c2b636d83aae3320800000000000000
+      internalID: 2539654400972337865
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Unclicked Tile_0: -2219422886029529778
+      Corn Stalks With Flag_0: 2539654400972337865
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2219422886029529778, guid: 29e3dc8b3da0746cb9b8412d4f34534e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6590e2fcec1dbab41b0ca6b18a5a0bd3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,7 +129,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -148,21 +148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451493c804636404bbd07136e89dd4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unclickedTile: {fileID: -2219422886029529778, guid: 29e3dc8b3da0746cb9b8412d4f34534e, type: 3}
-  FlaggedTile: {fileID: 1805158079502305607, guid: 16f8780f21ba14e10bb17e56a16974da, type: 3}
+  unclickedTile: {fileID: 21300000, guid: 6590e2fcec1dbab41b0ca6b18a5a0bd3, type: 3}
+  FlaggedTile: {fileID: 21300000, guid: 571bb20403e868f4aa7d2c6c849b2705, type: 3}
   clickedTiles:
-  - {fileID: -8113198124996197530, guid: 9e1686a8e894c47d2b1c2ec17f210864, type: 3}
-  - {fileID: -1474597892037966657, guid: e8747836bfec743a9b4f7409f36bcb8b, type: 3}
-  - {fileID: -3632235037993697366, guid: df4d227ed44204ad7a0792b9a611480b, type: 3}
-  - {fileID: 6744028877277679809, guid: 442e54bec695941d4af1782e6b133dc9, type: 3}
-  - {fileID: -8756539215083562286, guid: d7f714e219d2c49f0ab1f9e5ffb35fa0, type: 3}
-  - {fileID: 2206898631978542809, guid: 890c7b214af77487ba0c43454bd952ad, type: 3}
-  - {fileID: 5727822003985234377, guid: 378e75ffd728341149875f655c78f824, type: 3}
-  - {fileID: -2748003943051336544, guid: 0041ed0c3daff4e158c2cbba5a217389, type: 3}
-  - {fileID: -4742275485030273646, guid: 62b173a8ccc604bd6b4540e85a281dbd, type: 3}
-  mineTile: {fileID: 8135663367076951168, guid: 4de488122f3454b66b44ab6dbb350017, type: 3}
+  - {fileID: 21300000, guid: 9e1686a8e894c47d2b1c2ec17f210864, type: 3}
+  - {fileID: 21300000, guid: e8747836bfec743a9b4f7409f36bcb8b, type: 3}
+  - {fileID: 21300000, guid: df4d227ed44204ad7a0792b9a611480b, type: 3}
+  - {fileID: 21300000, guid: 442e54bec695941d4af1782e6b133dc9, type: 3}
+  - {fileID: 21300000, guid: d7f714e219d2c49f0ab1f9e5ffb35fa0, type: 3}
+  - {fileID: 21300000, guid: 890c7b214af77487ba0c43454bd952ad, type: 3}
+  - {fileID: 21300000, guid: 378e75ffd728341149875f655c78f824, type: 3}
+  - {fileID: 21300000, guid: 0041ed0c3daff4e158c2cbba5a217389, type: 3}
+  - {fileID: 21300000, guid: 62b173a8ccc604bd6b4540e85a281dbd, type: 3}
+  mineTile: {fileID: 21300000, guid: 33f36758bef4a4b48a95a10dbbfc7c9b, type: 3}
   mineWrongTile: {fileID: -851801900025170881, guid: f050994b0490a46bb841cb4840f2762b, type: 3}
-  mineHitTile: {fileID: 8250157587147991992, guid: 28817eb84f0ec4104a555617101e4529, type: 3}
+  mineHitTile: {fileID: 21300000, guid: 33f36758bef4a4b48a95a10dbbfc7c9b, type: 3}
   gameManager: {fileID: 0}
   flagged: 0
   active: 1
