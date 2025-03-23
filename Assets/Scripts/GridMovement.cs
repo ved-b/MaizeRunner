@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class GridMovement : MonoBehaviour
 {
@@ -12,9 +13,16 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private Sprite[] downSprites;
     [SerializeField] private Sprite[] leftSprites;
     [SerializeField] private Sprite[] rightSprites;
+    [SerializeField] private Sprite[] upDeathSprites;
+    [SerializeField] private Sprite[] downDeathSprites;
+    [SerializeField] private Sprite[] leftDeathSprites;
+    [SerializeField] private Sprite[] rightDeathSprites;
     [SerializeField] private float frameRate = 0.1f;
+    [SerializeField] private float deathFrameRate = 0.1f;
+    [SerializeField] private float moveDistance = 0.2f;
 
     private bool isMoving = false;
+    private bool isDead = false;
     private SpriteRenderer spriteRenderer;
     private Sprite[] currentSprites;
     private int currentFrame = 0;
@@ -25,14 +33,15 @@ public class GridMovement : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentSprites = downSprites;
+        facingDirection = Vector2.down;
         if (currentSprites.Length > 0)
-        {
             spriteRenderer.sprite = currentSprites[0];
-        }
     }
 
     private void Update()
     {
+        if (isDead)
+            return;
         animationTimer += Time.deltaTime;
         if (animationTimer >= frameRate && currentSprites.Length > 0)
         {
@@ -96,16 +105,14 @@ public class GridMovement : MonoBehaviour
             }
         }
     }
-    
+
     private void TryMove(Vector2 direction)
     {
         Vector2 targetPosition = (Vector2)transform.position + direction * gridSize;
         if (IsValidPosition(targetPosition))
-        {
             StartCoroutine(MovePlayer(direction));
-        }
     }
-    
+
     private bool IsValidPosition(Vector2 position)
     {
         float minX = gridOrigin.x;
@@ -122,7 +129,6 @@ public class GridMovement : MonoBehaviour
         Vector2 startPosition = transform.position;
         Vector2 endPosition = startPosition + direction * gridSize;
         float elapsedTime = 0f;
-
         while (elapsedTime < moveDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -130,19 +136,54 @@ public class GridMovement : MonoBehaviour
             transform.position = Vector2.Lerp(startPosition, endPosition, percentage);
             yield return null;
         }
-
         transform.position = endPosition;
         isMoving = false;
         ResetAnimation();
     }
-    
+
     private void ResetAnimation()
     {
         currentFrame = 0;
         animationTimer = 0f;
         if (currentSprites.Length > 0)
-        {
             spriteRenderer.sprite = currentSprites[0];
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        StopAllCoroutines();
+        StartCoroutine(PlayDeathAnimation());
+    }
+
+    private IEnumerator PlayDeathAnimation()
+    {
+        Vector3 offset = Vector3.zero;
+        if (facingDirection == Vector2.up)
+            offset = new Vector3(0f, -moveDistance, 0f);
+        else if (facingDirection == Vector2.down)
+            offset = new Vector3(0f, moveDistance, 0f);
+        else if (facingDirection == Vector2.left)
+            offset = new Vector3(moveDistance, 0f, 0f);
+        else if (facingDirection == Vector2.right)
+            offset = new Vector3(-moveDistance, 0f, 0f);
+
+        transform.DOMove(transform.position + offset, moveDuration);
+
+        Sprite[] selectedDeathSprites = downDeathSprites;
+        if (facingDirection == Vector2.up)
+            selectedDeathSprites = upDeathSprites;
+        else if (facingDirection == Vector2.down)
+            selectedDeathSprites = downDeathSprites;
+        else if (facingDirection == Vector2.left)
+            selectedDeathSprites = leftDeathSprites;
+        else if (facingDirection == Vector2.right)
+            selectedDeathSprites = rightDeathSprites;
+
+        for (int i = 0; i < selectedDeathSprites.Length; i++)
+        {
+            spriteRenderer.sprite = selectedDeathSprites[i];
+            yield return new WaitForSeconds(deathFrameRate);
         }
     }
 }

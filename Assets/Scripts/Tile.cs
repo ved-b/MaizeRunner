@@ -45,6 +45,14 @@ public class Tile : MonoBehaviour
             active = false;
             if (isMine) {
                 spriteRenderer.sprite = mineHitTile;
+                AudioManager.Instance.SetVolume("Background", 0.5f);
+                AudioManager.Instance.SetPitch("Background", 0.5f);
+                AudioManager.Instance.Play("Lose");
+                CameraShake.Instance.Shake(2f, 1f);
+                GridMovement gm = GameObject.FindWithTag("Player").GetComponent<GridMovement>();
+                if (gm != null){
+                    gm.Die();
+                }
                 gameManager.GameOver();
             } else {
                 spriteRenderer.sprite = clickedTiles[mineCount];
