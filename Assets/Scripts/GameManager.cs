@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private int width;
     private int height;
     private int numMines;
-    private readonly float tileSize = 0.34f;
+    private readonly float tileSize = 1f;
 
     // List to store all tile components
     private List<Tile> tiles = new List<Tile>();
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Example: 9x9 board with 10 mines
-        CreateGameBoard(24, 20, 80);
+        CreateGameBoard(10, 8, 10);
         ResetGameState();
         //RevealAllTiles();
     }
