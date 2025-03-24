@@ -2,35 +2,52 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI; // Added for UI Dropdown
 
 public enum Difficulty
 {
-    Easy,
-    Medium,
-    Hard
+    Easy,    // 0
+    Medium,  // 1
+    Hard     // 2
 }
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform tilePrefab;
     [SerializeField] private Transform gameHolder;
-    [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Set in Inspector
-
+    [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Default, overwritten by UI
+    public Dropdown difficultyDropdown;  // Assign the UI Dropdown in Inspector
+    
     private int width;
     private int height;
     private int numMines;
     private readonly float tileSize = 0.34f;
-
-    // List to store all tile components
     private List<Tile> tiles = new List<Tile>();
 
     void Start()
+{
+    if (difficultyDropdown != null)
     {
-        // Example: 9x9 board with 10 mines
-        CreateGameBoard(24, 20, 80);
-        ResetGameState();
-        //RevealAllTiles();
+        difficulty = (Difficulty)difficultyDropdown.value;
+        Debug.Log("Difficulty selected via UI: " + difficulty);
     }
+    
+    // Create game board based on selected difficulty.
+    switch (difficulty)
+    {
+        case Difficulty.Easy:
+            CreateGameBoard(10, 8, 10);
+            break;
+        case Difficulty.Medium:
+            CreateGameBoard(16, 14, 30);
+            break;
+        case Difficulty.Hard:
+            CreateGameBoard(24, 22, 80);
+            break;
+    }
+
+    ResetGameState();
+}
 
     public void CreateGameBoard(int width, int height, int numMines)
     {
