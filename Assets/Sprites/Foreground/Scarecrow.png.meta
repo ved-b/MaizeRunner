@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Scarecrow_0: 7208014375415968472
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

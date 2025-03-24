@@ -17,10 +17,16 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private Sprite[] downDeathSprites;
     [SerializeField] private Sprite[] leftDeathSprites;
     [SerializeField] private Sprite[] rightDeathSprites;
+    [SerializeField] private Sprite[] upHurtSprites;
+    [SerializeField] private Sprite[] downHurtSprites;
+    [SerializeField] private Sprite[] leftHurtSprites;
+    [SerializeField] private Sprite[] rightHurtSprites;
     [SerializeField] private float frameRate = 0.1f;
     [SerializeField] private float deathFrameRate = 0.1f;
     [SerializeField] private float moveDistance = 0.2f;
-
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private float hurtFrameRate = 0.1f;
+    public int crowLives = 3;
     private bool isMoving = false;
     private bool isDead = false;
     private SpriteRenderer spriteRenderer;
@@ -28,6 +34,7 @@ public class GridMovement : MonoBehaviour
     private int currentFrame = 0;
     private float animationTimer = 0f;
     private Vector2 facingDirection = Vector2.down;
+    
 
     private void Awake()
     {
@@ -149,11 +156,78 @@ public class GridMovement : MonoBehaviour
             spriteRenderer.sprite = currentSprites[0];
     }
 
+    private IEnumerator PlayHurtAnimation()
+    {
+        isMoving = true;
+        
+        Vector3 offset = Vector3.zero;
+        if (facingDirection == Vector2.up)
+            offset = new Vector3(0f, -moveDistance, 0f);
+        else if (facingDirection == Vector2.down)
+            offset = new Vector3(0f, moveDistance, 0f);
+        else if (facingDirection == Vector2.left)
+            offset = new Vector3(moveDistance, 0f, 0f);
+        else if (facingDirection == Vector2.right)
+            offset = new Vector3(-moveDistance, 0f, 0f);
+
+        transform.DOMove(transform.position + offset, moveDuration);
+
+        Sprite[] hurtSprites = downHurtSprites;
+        if (facingDirection == Vector2.up)
+            hurtSprites = upHurtSprites;
+        else if (facingDirection == Vector2.down)
+            hurtSprites = downHurtSprites;
+        else if (facingDirection == Vector2.left)
+            hurtSprites = leftHurtSprites;
+        else if (facingDirection == Vector2.right)
+            hurtSprites = rightHurtSprites;
+
+        for (int i = 0; i < hurtSprites.Length; i++)
+        {
+            spriteRenderer.sprite = hurtSprites[i];
+            yield return new WaitForSeconds(hurtFrameRate);
+        }
+        
+        ResetAnimation();
+        isMoving = false;
+    }
+
+
+    public void HitMine()
+    {
+        if(isDead)
+            return;
+        Debug.Log("Mine triggered! Revealing mine.");
+
+        if (Camera.main != null)
+        {
+            CameraShake.Instance.Shake(1f, 1f);
+        }
+
+        crowLives--;
+        Debug.Log("Crow lives remaining: " + crowLives);
+
+        if (crowLives <= 0)
+        {
+            Die();
+        }
+        if (crowLives == 2)
+        {
+            AudioManager.Instance.SetPitch("Background", 1.05f);
+        }
+        if (crowLives == 1)
+        {
+            AudioManager.Instance.SetPitch("Background", 1.1f);
+        }
+    }
     public void Die()
     {
         isDead = true;
         StopAllCoroutines();
         StartCoroutine(PlayDeathAnimation());
+        AudioManager.Instance.SetVolume("Background", 0.5f);
+        AudioManager.Instance.SetPitch("Background", 0.5f);
+        AudioManager.Instance.Play("Lose");
     }
 
     private IEnumerator PlayDeathAnimation()
@@ -184,6 +258,10 @@ public class GridMovement : MonoBehaviour
         {
             spriteRenderer.sprite = selectedDeathSprites[i];
             yield return new WaitForSeconds(deathFrameRate);
+        }
+        if (gameManager != null)
+        {
+            gameManager.GameOver();
         }
     }
 }
