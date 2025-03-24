@@ -60,32 +60,19 @@ public class GameManager : MonoBehaviour
     {
         int tilesCount = tiles.Count;
 
-        // --- Enforce Heuristic: Safe corners ---
-        // All four corners and their surrounding tiles must be safe
+        // --- Enforce Heuristic: Safe 3x3 Zone in Bottom Left Corner ---
+        // Bottom left 3x3 region: row 0 to 2, col 0 to 2.
         List<int> safeZone = new List<int>();
-
-        // Bottom-left corner (index 0)
-        safeZone.Add(0);
-        safeZone.AddRange(GetNeighbours(0));
-
-        // Bottom-right corner (index width - 1)
-        safeZone.Add(width - 1);
-        safeZone.AddRange(GetNeighbours(width - 1));
-
-        // Top-left corner (index (height - 1) * width)
-        int topLeftIndex = (height - 1) * width;
-        safeZone.Add(topLeftIndex);
-        safeZone.AddRange(GetNeighbours(topLeftIndex));
-
-        // Top-right corner (index (height * width) - 1)
-        int topRightIndex = (height * width) - 1;
-        safeZone.Add(topRightIndex);
-        safeZone.AddRange(GetNeighbours(topRightIndex));
-
-        // Remove any duplicates from the safe zone
-        safeZone = safeZone.Distinct().ToList();
-
-        // Candidate indices: exclude the safe zone.
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                int index = row * width + col;
+                safeZone.Add(index);
+            }
+        }
+        
+        // Candidate indices: exclude anything in the safeZone.
         List<int> candidateIndices = new List<int>();
         for (int i = 0; i < tilesCount; i++)
         {
@@ -101,8 +88,8 @@ public class GameManager : MonoBehaviour
 
         // Place mines randomly among candidate indices.
         var initialMinePositions = candidateIndices.OrderBy(x => Random.value)
-                                                   .Take(numMines)
-                                                   .ToList();
+                                                .Take(numMines)
+                                                .ToList();
         foreach (int pos in initialMinePositions)
         {
             tiles[pos].isMine = true;
@@ -152,7 +139,7 @@ public class GameManager : MonoBehaviour
             int newCost = EvaluateCost(allowedType3);
             int delta = newCost - currentCost;
 
-            // Accept the move if it reduces cost, or probabilistically if it doesn't.
+            // Accept the move if it reduces cost, or probabilistically if not.
             if (delta <= 0 || Random.value < Mathf.Exp(-delta / temperature))
             {
                 currentCost = newCost;
