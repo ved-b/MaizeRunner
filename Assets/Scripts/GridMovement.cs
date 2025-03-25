@@ -154,6 +154,12 @@ public class GridMovement : MonoBehaviour
         isDead = true;
         StopAllCoroutines();
         StartCoroutine(PlayDeathAnimation());
+        PlayerDied();
+    }
+
+    private void PlayerDied(){
+        LevelManager.instance.GameOver();
+        gameObject.SetActive(false);
     }
 
     private IEnumerator PlayDeathAnimation()
