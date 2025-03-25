@@ -22,4 +22,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void Win(){
+        UIManager _ui = GetComponent<UIManager>();
+        if (_ui != null){
+            _ui.ToggleWinPanel();
+        }
+    }
+
 }

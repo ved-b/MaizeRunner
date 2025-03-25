@@ -324,6 +324,8 @@ public class GameManager : MonoBehaviour
 
     public void WinGame(){
         RevealAllTiles();
+        LevelManager.instance.Win();
+        gameHolder.gameObject.SetActive(false);
         Debug.Log("You Win!");
     }
 }
