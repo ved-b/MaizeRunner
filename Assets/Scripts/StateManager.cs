@@ -11,7 +11,11 @@ public class StateManager : MonoBehaviour
 
     public void ChangeSceneByName(string name){
         if (name == "Quit"){
-            Application.Quit();
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
             return;
         }
         if (name != null){
