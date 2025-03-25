@@ -26,6 +26,7 @@ public class GridMovement : MonoBehaviour
     [SerializeField] private float moveDistance = 0.2f;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private float hurtFrameRate = 0.1f;
+    public GameObject heart3, heart2, heart1;
     public int crowLives = 3;
     private bool isMoving = false;
     private bool isDead = false;
@@ -43,6 +44,9 @@ public class GridMovement : MonoBehaviour
         facingDirection = Vector2.down;
         if (currentSprites.Length > 0)
             spriteRenderer.sprite = currentSprites[0];
+        heart1.gameObject.SetActive(true);
+        heart2.gameObject.SetActive(true);
+        heart3.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -213,10 +217,13 @@ public class GridMovement : MonoBehaviour
         }
         if (crowLives == 2)
         {
+            heart3.gameObject.SetActive(false);
             AudioManager.Instance.SetPitch("Background", 1.05f);
         }
         if (crowLives == 1)
         {
+            heart3.gameObject.SetActive(false);
+            heart2.gameObject.SetActive(false);
             AudioManager.Instance.SetPitch("Background", 1.1f);
         }
     }
@@ -228,6 +235,9 @@ public class GridMovement : MonoBehaviour
         AudioManager.Instance.SetVolume("Background", 0.5f);
         AudioManager.Instance.SetPitch("Background", 0.5f);
         AudioManager.Instance.Play("Lose");
+        heart3.gameObject.SetActive(false);
+        heart2.gameObject.SetActive(false);
+        heart1.gameObject.SetActive(false);
     }
 
     private IEnumerator PlayDeathAnimation()
