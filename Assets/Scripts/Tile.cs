@@ -19,6 +19,7 @@ public class Tile : MonoBehaviour
     public bool active = true;
     public bool isMine = false;
     public int mineCount = 0;
+    public bool isWinner = false;
 
     void Awake()
     {
@@ -41,19 +42,31 @@ public class Tile : MonoBehaviour
     }
 
     public void ClickedTile() {
+
         if (active & !flagged) {
             active = false;
+            
             if (isMine) {
                 spriteRenderer.sprite = mineHitTile;
-                AudioManager.Instance.SetVolume("Background", 0.5f);
-                AudioManager.Instance.SetPitch("Background", 0.5f);
-                AudioManager.Instance.Play("Lose");
-                CameraShake.Instance.Shake(2f, 1f);
                 GridMovement gm = GameObject.FindWithTag("Player").GetComponent<GridMovement>();
                 if (gm != null){
-                    gm.Die();
+                    gm.HitMine();
                 }
-                gameManager.GameOver();
+            } else {
+                spriteRenderer.sprite = clickedTiles[mineCount];
+                if (mineCount == 0) {
+                    gameManager.ClickNeighbours(this);
+                }
+            }
+        }     
+    }
+
+    public void Deactivate(){
+        if (active & !flagged) {
+            active = false;
+            
+            if (isMine) {
+                spriteRenderer.sprite = mineHitTile;
             } else {
                 spriteRenderer.sprite = clickedTiles[mineCount];
                 if (mineCount == 0) {
@@ -68,5 +81,10 @@ public class Tile : MonoBehaviour
         {
             ClickedTile();
         }
+        if (other.CompareTag("Player") && isWinner) 
+        {
+            gameManager.WinGame();
+        }
+    
     }
-}
+}   
