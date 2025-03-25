@@ -141,11 +141,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 852189623061499939, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.91
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 852189623061499939, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.23
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 852189623061499939, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -181,23 +181,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: gridSize
-      value: 0.34
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: gridWidth
-      value: 24
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: gridHeight
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: gridOrigin.x
-      value: -3.91
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: gridOrigin.y
-      value: -3.23
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4797899678286146600, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: m_Size.x
@@ -251,7 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 5098233240433769473, guid: beb3eab71bed04aac808a253b45dc713, type: 3}
   gameHolder: {fileID: 1421730956}
-  difficulty: 2
+  difficulty: 0
+  difficultyDropdown: {fileID: 0}
 --- !u!4 &818018048
 Transform:
   m_ObjectHideFlags: 0
@@ -423,10 +424,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 4.7, y: -3}
-      - {x: 4.7, y: 4.3}
-      - {x: -4, y: 4.3}
-      - {x: -4, y: -3}
+    - - {x: 8, y: -7}
+      - {x: 8, y: 7}
+      - {x: -8, y: 7}
+      - {x: -8, y: -7}
   m_UseDelaunayMesh: 0
 --- !u!4 &1644292397
 Transform:
@@ -538,7 +539,7 @@ Camera:
   far clip plane: 1000
   field of view: 1
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -563,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 1963009105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.589126, y: -2.64746, z: -10}
+  m_LocalPosition: {x: -3.5, y: -4.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -741,7 +742,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 1
-    OrthographicSize: 1
+    OrthographicSize: 2.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -768,7 +769,7 @@ Transform:
   m_GameObject: {fileID: 1999225142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.91, y: -3.23, z: -10}
+  m_LocalPosition: {x: -3.5, y: -4.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
