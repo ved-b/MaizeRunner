@@ -302,7 +302,7 @@ public class GameManager : MonoBehaviour
         return neighbours;
     }
 
-    private void RevealAllTiles()
+    public void RevealAllTiles()
     {
         foreach (Tile tile in tiles)
         {

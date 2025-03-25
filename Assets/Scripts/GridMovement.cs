@@ -238,6 +238,7 @@ public class GridMovement : MonoBehaviour
         heart3.gameObject.SetActive(false);
         heart2.gameObject.SetActive(false);
         heart1.gameObject.SetActive(false);
+        gameManager.RevealAllTiles();
         PlayerDied();
     }
 
