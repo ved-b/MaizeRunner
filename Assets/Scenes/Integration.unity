@@ -214,8 +214,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1140901135}
-  - {fileID: 1079951122}
   - {fileID: 2082913818}
+  - {fileID: 1079951122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -286,11 +286,11 @@ PrefabInstance:
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: heart1
       value: 
-      objectReference: {fileID: 2082913817}
+      objectReference: {fileID: 1079951121}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: heart2
       value: 
-      objectReference: {fileID: 1079951121}
+      objectReference: {fileID: 2082913817}
     - target: {fileID: 1735518396120517664, guid: 66d7cf96866c9400c8d3b3be90252b56, type: 3}
       propertyPath: heart3
       value: 
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 1079951124}
   - component: {fileID: 1079951123}
   m_Layer: 5
-  m_Name: Heart 2
+  m_Name: Heart 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 2082913820}
   - component: {fileID: 2082913819}
   m_Layer: 5
-  m_Name: Heart 1
+  m_Name: Heart 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
