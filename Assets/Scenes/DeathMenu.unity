@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 539797992}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1966044467}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: ChangeSceneByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Quit
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &539797992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &613514620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1313,7 +1325,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1808961082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1966044467}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: ReloadCurrentScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1808961082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,6 +1589,7 @@ GameObject:
   - component: {fileID: 1966044463}
   - component: {fileID: 1966044466}
   - component: {fileID: 1966044465}
+  - component: {fileID: 1966044467}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1610,6 +1635,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b096aba9b356d4fc6920cf851b484200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1966044467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966044462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29eca66c9020042bbb3d9b8977653f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1999225142
