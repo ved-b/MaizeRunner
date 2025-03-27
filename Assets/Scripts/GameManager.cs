@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         }
         UpdateMineCounts();
         
+        int topRightIndex = (height * width) - 1;
         tiles[topRightIndex].isWinner = true;
         Debug.Log("Winner tile is at " + topRightIndex);
 
