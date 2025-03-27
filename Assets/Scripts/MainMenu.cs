@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,11 @@ public class MainMenu : MonoBehaviour
 
     public GameObject StartMenu;
     public GameObject LevelSelect;
+
+    [Header("Camera Movement")]
+    public Camera mainCamera; 
+    public float moveSpeed = 5f; 
+    bool isAtStartMenu = true;
 
     public void StartGame() {
         Debug.Log("Go to level_1");
@@ -22,14 +28,36 @@ public class MainMenu : MonoBehaviour
         #endif
     }
 
-    public void SelectLevelMenu() {
-        if (StartMenu.activeSelf) {
-            //Disable StartMenu Screen
+    public void ToggleMenu() {
+        if (isAtStartMenu) {
+            StartCoroutine(MoveCamera(new Vector3(63f, 0f, 0f)));
             StartMenu.SetActive(false);
-
-            //Enable LevelSelect
+        } else {
+            StartCoroutine(MoveCamera(new Vector3(-63f, 0f, 0f)));
             LevelSelect.SetActive(true);
         }
+
+        isAtStartMenu = !isAtStartMenu;
+    }
+
+    private IEnumerator MoveCamera(Vector3 offset)
+    {
+        Vector3 startPos = mainCamera.transform.position;
+        Vector3 targetPos = startPos + offset;
+        float elapsedTime = 0f;
+        float duration = Mathf.Abs(offset.x) / moveSpeed;
+
+        while (elapsedTime < duration)
+        {
+            mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCamera.transform.position = targetPos; // Ensure exact final position
+
+        if (!isAtStartMenu) LevelSelect.SetActive(true);
+        else StartMenu.SetActive(true);
     }
 
     public void SelectLevel(Button button) {
@@ -45,15 +73,5 @@ public class MainMenu : MonoBehaviour
 
     public void Tutorial() {
         Debug.Log("Display Tutorial");
-    }
-
-    public void ReturnStartMenu () {
-        if (LevelSelect.activeSelf) {
-            //Disable LevelSelect
-            LevelSelect.SetActive(false);
-
-            //Enable StartMenu
-            StartMenu.SetActive(true);
-        }
     }
 }
