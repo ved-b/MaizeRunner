@@ -41,9 +41,8 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void ClickedTile() {
-
-        if (active & !flagged) {
+    public void ClickedTile(bool forceReveal = false) {
+        if (active && (forceReveal || (!flagged || isMine))) {
             active = false;
             
             if (isMine) {
@@ -76,10 +75,9 @@ public class Tile : MonoBehaviour
         }
     }
 
-     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player") && active)
-        {
-            ClickedTile();
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player") && active) {
+            ClickedTile(true);
         }
         if (other.CompareTag("Player") && isWinner) 
         {
