@@ -2,35 +2,54 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI; // Added for UI Dropdown
 
 public enum Difficulty
 {
-    Easy,
-    Medium,
-    Hard
+    Easy,    // 0
+    Medium,  // 1
+    Hard     // 2
 }
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform tilePrefab;
     [SerializeField] private Transform gameHolder;
-    [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Set in Inspector
-
+    [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Default, overwritten by UI
+    public Dropdown difficultyDropdown;  // Assign the UI Dropdown in Inspector
+    
     private int width;
     private int height;
     private int numMines;
-    private readonly float tileSize = 0.34f;
+    private readonly float tileSize = 1f;
 
     // List to store all tile components
     private List<Tile> tiles = new List<Tile>();
 
     void Start()
+{
+    if (difficultyDropdown != null)
     {
-        // Example: 9x9 board with 10 mines
-        CreateGameBoard(24, 20, 40);
-        ResetGameState();
-        //RevealAllTiles();
+        difficulty = (Difficulty)difficultyDropdown.value;
+        Debug.Log("Difficulty selected via UI: " + difficulty);
     }
+    
+    // Create game board based on selected difficulty.
+    switch (difficulty)
+    {
+        case Difficulty.Easy:
+            CreateGameBoard(10, 8, 10);
+            break;
+        case Difficulty.Medium:
+            CreateGameBoard(16, 14, 30);
+            break;
+        case Difficulty.Hard:
+            CreateGameBoard(24, 22, 80);
+            break;
+    }
+
+    ResetGameState();
+}
 
     public void CreateGameBoard(int width, int height, int numMines)
     {
@@ -60,33 +79,30 @@ public class GameManager : MonoBehaviour
     {
         int tilesCount = tiles.Count;
 
-        // --- Enforce Heuristic: Safe corners ---
-        // All four corners and their surrounding tiles must be safe
+        // --- Enforce Heuristic: Safe 3x3 Zone in Bottom Left and Top Right Corners ---
         List<int> safeZone = new List<int>();
 
-        // Bottom-left corner (index 0)
-        safeZone.Add(0);
-        safeZone.AddRange(GetNeighbours(0));
-
-        // Bottom-right corner (index width - 1)
-        safeZone.Add(width - 1);
-        safeZone.AddRange(GetNeighbours(width - 1));
-
-        // Top-left corner (index (height - 1) * width)
-        int topLeftIndex = (height - 1) * width;
-        safeZone.Add(topLeftIndex);
-        safeZone.AddRange(GetNeighbours(topLeftIndex));
-
-        // Top-right corner (index (height * width) - 1)
-        int topRightIndex = (height * width) - 1;
-        safeZone.Add(topRightIndex);
-        safeZone.AddRange(GetNeighbours(topRightIndex));
+        // Bottom left safe zone: rows 0 to 2, cols 0 to 2.
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                int index = row * width + col;
+                safeZone.Add(index);
+            }
+        }
         
-
-        // Remove any duplicates from the safe zone
-        safeZone = safeZone.Distinct().ToList();
-
-        // Candidate indices: exclude the safe zone.
+        // Top right safe zone: rows (height - 3) to (height - 1), cols (width - 3) to (width - 1).
+        for (int row = height - 3; row < height; row++)
+        {
+            for (int col = width - 3; col < width; col++)
+            {
+                int index = row * width + col;
+                safeZone.Add(index);
+            }
+        }
+        
+        // Candidate indices: exclude safeZone indices.
         List<int> candidateIndices = new List<int>();
         for (int i = 0; i < tilesCount; i++)
         {
@@ -102,8 +118,8 @@ public class GameManager : MonoBehaviour
 
         // Place mines randomly among candidate indices.
         var initialMinePositions = candidateIndices.OrderBy(x => Random.value)
-                                                   .Take(numMines)
-                                                   .ToList();
+                                                    .Take(numMines)
+                                                    .ToList();
         foreach (int pos in initialMinePositions)
         {
             tiles[pos].isMine = true;
@@ -148,7 +164,7 @@ public class GameManager : MonoBehaviour
             if (currentNonMines.Count == 0) break;
             int nonMineIndex = currentNonMines[Random.Range(0, currentNonMines.Count)];
 
-            // Make the swap: remove mine from mineIndex and add mine to nonMineIndex.
+            // Swap: remove mine from mineIndex and add mine to nonMineIndex.
             tiles[mineIndex].isMine = false;
             tiles[nonMineIndex].isMine = true;
             UpdateMineCounts();
@@ -156,14 +172,14 @@ public class GameManager : MonoBehaviour
             int newCost = EvaluateCost(allowedType3);
             int delta = newCost - currentCost;
 
-            // Accept the move if it reduces cost, or probabilistically if it doesn't.
+            // Accept improvements, or probabilistically accept downs.
             if (delta <= 0 || Random.value < Mathf.Exp(-delta / temperature))
             {
                 currentCost = newCost;
             }
             else
             {
-                // Revert the swap.
+                // Revert swap.
                 tiles[mineIndex].isMine = true;
                 tiles[nonMineIndex].isMine = false;
                 UpdateMineCounts();
