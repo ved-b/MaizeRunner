@@ -1,16 +1,25 @@
 using DG.Tweening;
+using UnityEngine;
 
 public class CameraShake : SingletonMonoBehavior<CameraShake>
 {
-    
-        public void Shake(float duration, float strength)
-        {
-            Instance.OnShake(duration, strength);
-        }
+    // This reference should be updated to point to the active camera.
+    [SerializeField] private Transform activeCameraTransform;
 
-        private void OnShake(float duration, float strength)
+    public void SetActiveCamera(Transform newCameraTransform)
+    {
+        activeCameraTransform = newCameraTransform;
+    }
+
+    public void Shake(float duration, float strength)
+    {
+        if (activeCameraTransform == null)
         {
-            transform.DOShakePosition(duration, strength);
-            transform.DOShakeRotation(duration, strength);
+            Debug.LogWarning("Active camera transform not set, defaulting to Camera.main");
+            activeCameraTransform = Camera.main.transform;
         }
+        
+        activeCameraTransform.DOShakePosition(duration, strength);
+        activeCameraTransform.DOShakeRotation(duration, strength);
+    }
 }
