@@ -125,6 +125,10 @@ public class GameManager : MonoBehaviour
             tiles[pos].isMine = true;
         }
         UpdateMineCounts();
+        
+        int topRightIndex = (height * width) - 1;
+        tiles[topRightIndex].isWinner = true;
+        Debug.Log("Winner tile is at " + topRightIndex);
 
         // Set allowed type-3 tile count based on difficulty.
         int allowedType3 = 0;
@@ -186,6 +190,7 @@ public class GameManager : MonoBehaviour
             iterations++;
         }
 
+        
         Debug.Log("Monte Carlo finished with cost " + currentCost + " after " + iterations + " iterations.");
     }
 
@@ -314,11 +319,11 @@ public class GameManager : MonoBehaviour
         return neighbours;
     }
 
-    private void RevealAllTiles()
+    public void RevealAllTiles()
     {
         foreach (Tile tile in tiles)
         {
-            tile.ClickedTile();
+            tile.Deactivate();
         }
     }
 
@@ -332,5 +337,12 @@ public class GameManager : MonoBehaviour
     public void GameOver(){
         RevealAllTiles();
         Debug.Log("Game Over");
+    }
+
+    public void WinGame(){
+        RevealAllTiles();
+        LevelManager.instance.Win();
+        gameHolder.gameObject.SetActive(true);
+        Debug.Log("You Win!");
     }
 }
