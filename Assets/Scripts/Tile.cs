@@ -28,9 +28,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseOver(){
         if (active) {
-            if (Input.GetMouseButtonDown(0)) {
-                ClickedTile();
-            } else if (Input.GetMouseButtonDown(1)) {
+            if (Input.GetMouseButtonDown(1)) {
                 flagged = !flagged;
                 if (flagged) {
                     spriteRenderer.sprite = FlaggedTile;
