@@ -10,14 +10,15 @@ public class StateManager : MonoBehaviour
     }
 
     public void ChangeSceneByName(string name){
-        if (name == "Quit"){
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-            return;
-        }
+        // Not Needed
+        // if (name == "Quit"){
+        //     #if UNITY_EDITOR
+        //         UnityEditor.EditorApplication.isPlaying = false;
+        //     #else
+        //         Application.Quit();
+        //     #endif
+        //     return;
+        // }
         if (name != null){
             SceneManager.LoadScene(name);
         }
