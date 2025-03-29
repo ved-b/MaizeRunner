@@ -10,6 +10,7 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
     
     private bool isUsingFollowCamera = true;
     
+    
     private void Update()
     {
         // Check for F key press to switch cameras
@@ -33,6 +34,8 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
             followCamera.Priority = 0;
             mainCamera.Priority = 10;
             Debug.Log("Switched to Main Camera");
+            CameraShake.Instance.SetActiveCamera(mainCamera.transform);
+
         }
         else
         {
@@ -40,6 +43,8 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
             followCamera.Priority = 10;
             mainCamera.Priority = 0;
             Debug.Log("Switched to Follow Camera");
+            CameraShake.Instance.SetActiveCamera(followCamera.transform);
+
         }
         
         isUsingFollowCamera = !isUsingFollowCamera;
