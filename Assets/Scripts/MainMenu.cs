@@ -20,8 +20,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float fadeSpeed = 5;
 
     public void StartGame() {
-        Debug.Log("Go to level_1");
-        // SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void ExitGame() {
@@ -78,11 +77,11 @@ public class MainMenu : MonoBehaviour
     public void SelectLevel(Button button) {
         string buttonText = button.GetComponentInChildren<TextMeshProUGUI>().text;
         if (buttonText == "Level 1") {
-            Debug.Log("Level 1!");
+            SceneManager.LoadScene("Level 1");
         } else if (buttonText == "Level 2") {
-            Debug.Log("Level 2!");
+            SceneManager.LoadScene("Level 2");
         } else if (buttonText == "Level 3") {
-            Debug.Log("Level 3!");
+            SceneManager.LoadScene("Level 3");
         }
     }
 
