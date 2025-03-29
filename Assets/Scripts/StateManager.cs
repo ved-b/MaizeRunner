@@ -21,6 +21,23 @@ public class StateManager : MonoBehaviour
         if (name != null){
             SceneManager.LoadScene(name);
         }
+
+        if (name == "Level2"){
+            StartCoroutine(WaitAndLoadNextLevel("Level 2"));
+        }
+
+        if (name == "Level3"){
+            StartCoroutine(WaitAndLoadNextLevel("Level 3"));
+        }
+
+        if (name == "MainMenu"){
+            StartCoroutine(WaitAndLoadNextLevel("MainMenu"));
+        }
         
+    }
+
+    private IEnumerator WaitAndLoadNextLevel(string name){
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(name);
     }
 }
