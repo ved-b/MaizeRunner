@@ -995,7 +995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &776400754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10967,8 +10967,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9079d00e7e1a94ada94b79a30fc198c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathPanel: {fileID: 0}
-  winPanel: {fileID: 0}
+  deathPanel: {fileID: 1937531826}
+  winPanel: {fileID: 776400753}
 --- !u!114 &2092534363
 MonoBehaviour:
   m_ObjectHideFlags: 0
