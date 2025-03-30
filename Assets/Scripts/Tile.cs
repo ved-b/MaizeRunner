@@ -50,6 +50,7 @@ public class Tile : MonoBehaviour
                     gm.HitMine();
                 }
             } else {
+                AudioManager.Instance.Play("Clear");
                 spriteRenderer.sprite = clickedTiles[mineCount];
                 if (mineCount == 0) {
                     gameManager.ClickNeighbours(this);

@@ -45,6 +45,11 @@ public class GameManager : MonoBehaviour
         // Initialize count-up timer.
         elapsedTime = 0f;
         lastLoggedSecond = 0;
+        AudioManager.Instance.SetPitch("Background", 1f);
+        AudioManager.Instance.Stop("Background");
+        AudioManager.Instance.Stop("Win");
+        AudioManager.Instance.Stop("mainMenu");
+        AudioManager.Instance.Play("Background");
 
         // Create game board based on selected difficulty.
         switch (difficulty)
@@ -386,6 +391,8 @@ public class GameManager : MonoBehaviour
     {
         StopTimer();
         RevealAllTiles();
+        AudioManager.Instance.Stop("Background");
+        AudioManager.Instance.Play("Win");
         LevelManager.instance.Win();
         gameHolder.gameObject.SetActive(true);
         Debug.Log("You Win!");

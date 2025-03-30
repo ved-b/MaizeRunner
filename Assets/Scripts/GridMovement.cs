@@ -207,7 +207,7 @@ public class GridMovement : MonoBehaviour
         {
             CameraShake.Instance.Shake(1f, 1f);
         }
-
+        AudioManager.Instance.Play("Hit");
         crowLives--;
         Debug.Log("Crow lives remaining: " + crowLives);
 
@@ -218,13 +218,13 @@ public class GridMovement : MonoBehaviour
         if (crowLives == 2)
         {
             heart3.gameObject.SetActive(false);
-            AudioManager.Instance.SetPitch("Background", 1.05f);
+            AudioManager.Instance.SetPitch("Background", 1.25f);
         }
         if (crowLives == 1)
         {
             heart3.gameObject.SetActive(false);
             heart2.gameObject.SetActive(false);
-            AudioManager.Instance.SetPitch("Background", 1.1f);
+            AudioManager.Instance.SetPitch("Background", 1.5f);
         }
     }
     public void Die()

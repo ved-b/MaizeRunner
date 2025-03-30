@@ -2676,13 +2676,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Background
-    clip: {fileID: 8300000, guid: c80fc1667198a4e00abb1098a973fbdd, type: 3}
+    clip: {fileID: 8300000, guid: 311cfee2c6ee44c35815a72015062897, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
     loop: 1
   - name: Lose
     clip: {fileID: 8300000, guid: 14817ea9dc36645ae99eb73a4e514cd4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Win
+    clip: {fileID: 8300000, guid: 63cb5609c277742f78ea958be93a85f9, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Hit
+    clip: {fileID: 8300000, guid: 29c3ba37348d3422ca9ebd78641e3ad4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Clear
+    clip: {fileID: 8300000, guid: 088b120729aa047738ee0cf77024b712, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}

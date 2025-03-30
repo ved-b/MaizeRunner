@@ -18,7 +18,12 @@ public class MainMenu : MonoBehaviour
     [Header("Tutorial Screen")]
     [SerializeField] private CanvasGroup tutorialCanvas;
     [SerializeField] private float fadeSpeed = 5;
-
+    
+    private void Start() {
+        AudioManager.Instance.Stop("Background");
+        AudioManager.Instance.Stop("Win");
+        AudioManager.Instance.Play("mainMenu");
+    }
     public void StartGame() {
         SceneManager.LoadScene("Level 1");
     }
