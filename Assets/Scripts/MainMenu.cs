@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,9 +19,19 @@ public class MainMenu : MonoBehaviour
     [Header("Tutorial Screen")]
     [SerializeField] private CanvasGroup tutorialCanvas;
     [SerializeField] private float fadeSpeed = 5;
+    [SerializeField] Animator transitionAnim;
+    [SerializeField] GameObject transitionPanel;
 
     public void StartGame() {
+        StartCoroutine(LoadLevel());
+    }
+
+    IEnumerator LoadLevel(){
+        transitionPanel.SetActive(true);
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("Level 1");
+        transitionAnim.SetTrigger("Start");
     }
 
     public void ExitGame() {
