@@ -29,14 +29,16 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.Play("mainMenu");
     }
     public void StartGame() {
-        StartCoroutine(LoadLevel());
+        StartCoroutine(LoadLevel("Level 1"));
     }
 
-    IEnumerator LoadLevel(){
+    IEnumerator LoadLevel(string name){
+        AudioManager.Instance.Stop("mainMenu");
+        AudioManager.Instance.Play("Transition");
         transitionPanel.SetActive(true);
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene(name);
         transitionAnim.SetTrigger("Start");
     }
 
@@ -94,11 +96,11 @@ public class MainMenu : MonoBehaviour
     public void SelectLevel(Button button) {
         string buttonText = button.GetComponentInChildren<TextMeshProUGUI>().text;
         if (buttonText == "Level 1") {
-            SceneManager.LoadScene("Level 1");
+            StartCoroutine(LoadLevel("Level 1"));
         } else if (buttonText == "Level 2") {
-            SceneManager.LoadScene("Level 2");
+            StartCoroutine(LoadLevel("Level 2"));
         } else if (buttonText == "Level 3") {
-            SceneManager.LoadScene("Level 3");
+            StartCoroutine(LoadLevel("Level 3"));
         }
     }
 
