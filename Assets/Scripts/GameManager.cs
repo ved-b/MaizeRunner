@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Default, overwritten by UI
     public Dropdown difficultyDropdown;  // Assign the UI Dropdown in Inspector
 
-    // Count-up timer variables
-    private float elapsedTime; // Timer starts at 0 and counts upward
+    // Countdown timer variables
+    [SerializeField] private float startingTime = 60f; // Set the starting time in seconds
+    private float remainingTime;
     private bool isGameActive = true;
     private int lastLoggedSecond; // To log timer once per second
 
@@ -39,9 +40,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("Difficulty selected via UI: " + difficulty);
         }
         
-        // Initialize count-up timer.
-        elapsedTime = 0f;
-        lastLoggedSecond = 0;
+        // Initialize countdown timer.
+        remainingTime = startingTime;
+        lastLoggedSecond = Mathf.CeilToInt(remainingTime);
+        AudioManager.Instance.SetPitch("Background", 1f);
 
         // Create game board based on selected difficulty.
         switch (difficulty)
@@ -64,14 +66,41 @@ public class GameManager : MonoBehaviour
     {
         if (isGameActive)
         {
-            // Increase the elapsed time.
-            elapsedTime += Time.deltaTime;
-            int currentSeconds = Mathf.FloorToInt(elapsedTime);
-            // Log the timer when a new whole second is reached.
-            if (currentSeconds > lastLoggedSecond)
+            // Decrease the remaining time.
+            remainingTime -= Time.deltaTime;
+            if (remainingTime <= 0f)
             {
-                Debug.Log("Timer: " + FormatTime(elapsedTime));
-                lastLoggedSecond = currentSeconds;
+                remainingTime = 0f;
+                Debug.Log("Timer: " + FormatTime(remainingTime));
+                StopTimer();  // Stop the timer when it reaches 0
+                // Find the player by tag and call Die() on its GridMovement component.
+                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+                if (playerObj != null)
+                {
+                    GridMovement gridMovement = playerObj.GetComponent<GridMovement>();
+                    if (gridMovement != null)
+                    {
+                        gridMovement.Die();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("GridMovement component not found on object with tag 'Player'.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("No GameObject found with tag 'Player'.");
+                }
+            }
+            else
+            {
+                int currentSeconds = Mathf.CeilToInt(remainingTime);
+                // Log the timer when the whole second changes.
+                if (currentSeconds < lastLoggedSecond)
+                {
+                    Debug.Log("Timer: " + FormatTime(remainingTime));
+                    lastLoggedSecond = currentSeconds;
+                }
             }
         }
     }
@@ -82,6 +111,12 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    // Public method to stop the timer.
+    public void StopTimer()
+    {
+        isGameActive = false;
     }
 
     public void CreateGameBoard(int width, int height, int numMines)
@@ -384,10 +419,5 @@ public class GameManager : MonoBehaviour
         LevelManager.instance.Win();
         gameHolder.gameObject.SetActive(true);
         Debug.Log("You Win!");
-    }
-    
-    public void StopTimer()
-    {
-        isGameActive = false;
     }
 }
