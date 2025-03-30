@@ -24,7 +24,7 @@ PR Id's: (https://github.com/ved-b/MaizeRunner/pull/11), (https://github.com/ved
 
 ## Aaron Deo
 Video 
-https://github.com/user-attachments/assets/82f4f3bc-d5c8-43bc-b10e-b4af34d6d854
+![GameJam Video Aaron](https://github.com/user-attachments/assets/82f4f3bc-d5c8-43bc-b10e-b4af34d6d854)
 
 Two Features I worked on were sound effects and animations for clearing tiles as well has mine collision. I also worked on the Health and Death Sequence for the crow.
 
