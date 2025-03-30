@@ -207,7 +207,7 @@ public class GridMovement : MonoBehaviour
         {
             CameraShake.Instance.Shake(1f, 1f);
         }
-
+        AudioManager.Instance.Play("Hit");
         crowLives--;
         Debug.Log("Crow lives remaining: " + crowLives);
 
