@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI; // Still needed for Dropdown
+using TMPro;
 
 public enum Difficulty
 {
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     private float elapsedTime; // Timer starts at 0 and counts upward
     private bool isGameActive = true;
     private int lastLoggedSecond; // To log timer once per second
+
+    [SerializeField] private TextMeshProUGUI timerText;
 
     private int width;
     private int height;
@@ -70,8 +73,10 @@ public class GameManager : MonoBehaviour
             // Log the timer when a new whole second is reached.
             if (currentSeconds > lastLoggedSecond)
             {
-                Debug.Log("Timer: " + FormatTime(elapsedTime));
+                string formattedTime = FormatTime(elapsedTime);
+                Debug.Log("Timer: " + formattedTime);
                 lastLoggedSecond = currentSeconds;
+                timerText.text = formattedTime;
             }
         }
     }
