@@ -21,6 +21,8 @@ public class MainMenu : MonoBehaviour
     
     private void Start() {
         AudioManager.Instance.Stop("Background");
+        AudioManager.Instance.Stop("Win");
+        AudioManager.Instance.Play("mainMenu");
     }
     public void StartGame() {
         SceneManager.LoadScene("Level 1");

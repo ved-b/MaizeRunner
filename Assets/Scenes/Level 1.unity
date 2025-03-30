@@ -2676,13 +2676,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Background
-    clip: {fileID: 8300000, guid: c80fc1667198a4e00abb1098a973fbdd, type: 3}
+    clip: {fileID: 8300000, guid: 311cfee2c6ee44c35815a72015062897, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
     loop: 1
   - name: Lose
     clip: {fileID: 8300000, guid: 14817ea9dc36645ae99eb73a4e514cd4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Win
+    clip: {fileID: 8300000, guid: 63cb5609c277742f78ea958be93a85f9, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
@@ -11242,7 +11248,7 @@ Camera:
   far clip plane: 1000
   field of view: 1
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11267,7 +11273,7 @@ Transform:
   m_GameObject: {fileID: 1963009105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9224596, y: -3.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -16.018814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
