@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.UI; // Added for UI Dropdown
+using UnityEngine.UI; // Still needed for Dropdown
 
 public enum Difficulty
 {
@@ -17,7 +17,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform gameHolder;
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Default, overwritten by UI
     public Dropdown difficultyDropdown;  // Assign the UI Dropdown in Inspector
-    
+
+    // Count-up timer variables
+    private float elapsedTime; // Timer starts at 0 and counts upward
+    private bool isGameActive = true;
+    private int lastLoggedSecond; // To log timer once per second
+
     private int width;
     private int height;
     private int numMines;
@@ -27,29 +32,57 @@ public class GameManager : MonoBehaviour
     private List<Tile> tiles = new List<Tile>();
 
     void Start()
-{
-    if (difficultyDropdown != null)
     {
-        difficulty = (Difficulty)difficultyDropdown.value;
-        Debug.Log("Difficulty selected via UI: " + difficulty);
-    }
-    
-    // Create game board based on selected difficulty.
-    switch (difficulty)
-    {
-        case Difficulty.Easy:
-            CreateGameBoard(10, 8, 10);
-            break;
-        case Difficulty.Medium:
-            CreateGameBoard(16, 14, 30);
-            break;
-        case Difficulty.Hard:
-            CreateGameBoard(24, 22, 80);
-            break;
+        if (difficultyDropdown != null)
+        {
+            difficulty = (Difficulty)difficultyDropdown.value;
+            Debug.Log("Difficulty selected via UI: " + difficulty);
+        }
+        
+        // Initialize count-up timer.
+        elapsedTime = 0f;
+        lastLoggedSecond = 0;
+
+        // Create game board based on selected difficulty.
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                CreateGameBoard(10, 8, 10);
+                break;
+            case Difficulty.Medium:
+                CreateGameBoard(16, 14, 30);
+                break;
+            case Difficulty.Hard:
+                CreateGameBoard(24, 22, 80);
+                break;
+        }
+
+        ResetGameState();
     }
 
-    ResetGameState();
-}
+    void Update()
+    {
+        if (isGameActive)
+        {
+            // Increase the elapsed time.
+            elapsedTime += Time.deltaTime;
+            int currentSeconds = Mathf.FloorToInt(elapsedTime);
+            // Log the timer when a new whole second is reached.
+            if (currentSeconds > lastLoggedSecond)
+            {
+                Debug.Log("Timer: " + FormatTime(elapsedTime));
+                lastLoggedSecond = currentSeconds;
+            }
+        }
+    }
+
+    // Format time as MM:SS.
+    private string FormatTime(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
 
     public void CreateGameBoard(int width, int height, int numMines)
     {
@@ -190,7 +223,6 @@ public class GameManager : MonoBehaviour
             iterations++;
         }
 
-        
         Debug.Log("Monte Carlo finished with cost " + currentCost + " after " + iterations + " iterations.");
     }
 
@@ -327,22 +359,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ClickNeighbours(Tile tile){
+    public void ClickNeighbours(Tile tile)
+    {
         int location = tiles.IndexOf(tile);
-        foreach (int pos in GetNeighbours(location)){
+        foreach (int pos in GetNeighbours(location))
+        {
             tiles[pos].ClickedTile();
         }
     }
 
-    public void GameOver(){
+    // This GameOver() can still be used for other cases if needed.
+    public void GameOver()
+    {
+        if (!isGameActive) return; // Prevent multiple game overs.
+        StopTimer();
         RevealAllTiles();
         Debug.Log("Game Over");
     }
 
-    public void WinGame(){
+    public void WinGame()
+    {
+        StopTimer();
         RevealAllTiles();
         LevelManager.instance.Win();
         gameHolder.gameObject.SetActive(true);
         Debug.Log("You Win!");
+    }
+    
+    public void StopTimer()
+    {
+        isGameActive = false;
     }
 }
