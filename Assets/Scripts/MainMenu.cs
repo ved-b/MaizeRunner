@@ -40,6 +40,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(name);
         transitionAnim.SetTrigger("Start");
+        AudioManager.Instance.Play("Transition");
     }
 
     public void ExitGame() {

@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class StateManager : MonoBehaviour
 {
+    [SerializeField] Animator transitionAnim;
+    [SerializeField] GameObject transitionPanel;
     public void ReloadCurrentScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().name));
     }
 
     public void ChangeSceneByName(string name){
@@ -20,8 +22,19 @@ public class StateManager : MonoBehaviour
         //     return;
         // }
         if (name != null){
-            SceneManager.LoadScene(name);
+            StartCoroutine(LoadLevel(name));
         }
         
+    }
+
+    IEnumerator LoadLevel(string name){
+        AudioManager.Instance.Stop("mainMenu");
+        AudioManager.Instance.Play("Transition");
+        transitionPanel.SetActive(true);
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(name);
+        transitionAnim.SetTrigger("Start");
+        AudioManager.Instance.Play("Transition");
     }
 }
