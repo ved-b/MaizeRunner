@@ -7,6 +7,10 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
     [Header("Camera References")]
     [SerializeField] private CinemachineCamera followCamera;
     [SerializeField] private CinemachineCamera mainCamera;
+
+    [Header("InGame Canvas")]
+    [SerializeField] private CanvasGroup inGameCanvas;
+    [SerializeField] private float fadeSpeed = 5;
     
     private bool isUsingFollowCamera = true;
     
@@ -35,7 +39,7 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
             mainCamera.Priority = 10;
             Debug.Log("Switched to Main Camera");
             CameraShake.Instance.SetActiveCamera(mainCamera.transform);
-
+            FadeCanvas(inGameCanvas, 0.25f, fadeSpeed);
         }
         else
         {
@@ -44,9 +48,15 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
             mainCamera.Priority = 0;
             Debug.Log("Switched to Follow Camera");
             CameraShake.Instance.SetActiveCamera(followCamera.transform);
-
+            FadeCanvas(inGameCanvas, 1f, fadeSpeed);
         }
         
         isUsingFollowCamera = !isUsingFollowCamera;
+    }
+
+    public void FadeCanvas(CanvasGroup canvasGroup, float targetAlpha, float duration)
+    {
+        canvasGroup.DOFade(targetAlpha, duration)
+            .SetEase(Ease.InOutSine); 
     }
 }

@@ -229,8 +229,11 @@ public class GridMovement : MonoBehaviour
     }
     public void Die()
     {
+        
         isDead = true;
         StopAllCoroutines();
+        if(gameManager != null)
+            gameManager.StopTimer();
         StartCoroutine(PlayDeathAnimation());
         AudioManager.Instance.SetVolume("Background", 0.5f);
         AudioManager.Instance.SetPitch("Background", 0.5f);
