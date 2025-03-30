@@ -22,6 +22,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Animator transitionAnim;
     [SerializeField] GameObject transitionPanel;
 
+    
+    private void Start() {
+        AudioManager.Instance.Stop("Background");
+        AudioManager.Instance.Stop("Win");
+        AudioManager.Instance.Play("mainMenu");
+    }
     public void StartGame() {
         StartCoroutine(LoadLevel());
     }
