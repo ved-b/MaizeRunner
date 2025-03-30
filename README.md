@@ -1,5 +1,8 @@
 # GameJam
- 
+
+Gameplay Video:
+https://www.youtube.com/watch?v=zeoeMl4CZzs
+
 ##Ved:
 Video:
 https://github.com/user-attachments/assets/0745c259-9082-4a48-a982-bfea13684e0a
@@ -18,3 +21,14 @@ PR Id's: #9 (https://github.com/ved-b/MaizeRunner/pull/9), #35 (https://github.c
 Overall graphic inegration/creation within the levels and UI elements
 PR Id's: #11 (https://github.com/ved-b/MaizeRunner/pull/11), #24 (https://github.com/ved-b/MaizeRunner/pull/24)
 
+## Aaron Deo
+Video 
+https://github.com/user-attachments/assets/82f4f3bc-d5c8-43bc-b10e-b4af34d6d854
+
+Two Features I worked on were sound effects and animations for clearing tiles as well has mine collision. I also worked on the Health and Death Sequence for the crow.
+
+PR for sound effects and animations: 
+https://github.com/ved-b/MaizeRunner/pull/39
+
+PR for Health and Death Sequence:
+https://github.com/ved-b/MaizeRunner/pull/25
