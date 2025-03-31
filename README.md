@@ -33,3 +33,16 @@ https://github.com/ved-b/MaizeRunner/pull/39
 
 PR for Health and Death Sequence:
 https://github.com/ved-b/MaizeRunner/pull/25
+
+## Noah Stasuik
+
+https://github.com/user-attachments/assets/4bfd40e5-5eeb-4ded-96bb-b96acf58e9a2
+
+Two Features I worked on were the crow movement and the camera, follow camera and the zoom in / out effect.
+
+PR for movement: 
+[https://github.com/ved-b/MaizeRunner/pull/39](https://github.com/ved-b/MaizeSweeper/pull/10)
+
+PR for Cameras
+Follow : [https://github.com/ved-b/MaizeRunner/pull/25](https://github.com/ved-b/MaizeSweeper/pull/14)
+Zoom : [https://github.com/ved-b/MaizeSweeper/pull/31](https://github.com/ved-b/MaizeSweeper/pull/31)
