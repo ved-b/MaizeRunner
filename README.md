@@ -3,6 +3,13 @@
 Gameplay Video:
 https://www.youtube.com/watch?v=zeoeMl4CZzs
 
+Figma Page:
+https://ved123.itch.io/maizesweeper
+
+Peer Testing:
+During peer-testing with friends they often got lost while playing the game since the camera is very zoomed in. Therefore, we added a zoom-out feature to ensure players always know where they are in the map.
+
+We also found that players that the old music got annoying since it would repeat on loop after 30 seconds. Given this feedback, we found a more suitable, calming music choice.
  
 ## Ved:
 Video:
