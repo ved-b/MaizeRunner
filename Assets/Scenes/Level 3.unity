@@ -2649,7 +2649,7 @@ MonoBehaviour:
   followCamera: {fileID: 1999225145}
   mainCamera: {fileID: 893630117}
   inGameCanvas: {fileID: 1101026410}
-  fadeSpeed: 5
+  fadeSpeed: 2
 --- !u!4 &1383702941
 Transform:
   m_ObjectHideFlags: 0
