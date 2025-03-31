@@ -1300,6 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 5098233240433769473, guid: beb3eab71bed04aac808a253b45dc713, type: 3}
+  finalTilePrefab: {fileID: 5098233240433769473, guid: ab40b40992faca6488b25910045772e6, type: 3}
   gameHolder: {fileID: 1421730956}
   difficulty: 1
   difficultyDropdown: {fileID: 0}

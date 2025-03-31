@@ -15,6 +15,7 @@ public enum Difficulty
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform tilePrefab;
+    [SerializeField] private Transform finalTilePrefab;
     [SerializeField] private Transform gameHolder;
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;  // Default, overwritten by UI
     public Dropdown difficultyDropdown;  // Assign the UI Dropdown in Inspector
@@ -105,8 +106,14 @@ public class GameManager : MonoBehaviour
         {
             for (int col = 0; col < width; col++)
             {
+                
                 Debug.Log("Creating tile at " + row + ", " + col);
-                Transform tileTransform = Instantiate(tilePrefab, gameHolder);
+                Transform tileTransform;
+                if (row == height-1 && col == width-1) {
+                    tileTransform = Instantiate(finalTilePrefab, gameHolder); 
+                } else {
+                    tileTransform = Instantiate(tilePrefab, gameHolder);
+                }
                 float xIndex = col - ((width - 1) / 2.0f);
                 float yIndex = row - ((height - 1) / 2.0f);
                 tileTransform.localPosition = new Vector2(xIndex * tileSize, yIndex * tileSize);
