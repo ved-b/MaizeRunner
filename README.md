@@ -1,8 +1,18 @@
 # GameJam
 
+Link to game: 
+https://ved123.itch.io/maizesweeper
+
 Gameplay Video:
 https://www.youtube.com/watch?v=zeoeMl4CZzs
 
+Figma Page:
+https://www.figma.com/design/ycgkR9zbdQyu3Mqw8Gv2WL/MaizeRunner?node-id=0-1&t=K5pmPRHrp3fjaS1m-1
+
+Peer Testing:
+During peer-testing with friends they often got lost while playing the game since the camera is very zoomed in. Therefore, we added a zoom-out feature to ensure players always know where they are in the map.
+
+We also found that players that the old music got annoying since it would repeat on loop after 30 seconds. Given this feedback, we found a more suitable, calming music choice.
  
 ## Ved:
 Video:
