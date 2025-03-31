@@ -395,6 +395,13 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.Play("Win");
         LevelManager.instance.Win();
         gameHolder.gameObject.SetActive(true);
+
+        GridMovement gridMovement = FindObjectOfType<GridMovement>();
+        if (gridMovement != null)
+        {
+            gridMovement.enabled = false;
+        }
+
         Debug.Log("You Win!");
     }
     

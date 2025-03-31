@@ -970,7 +970,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-    loop: 0
+    loop: 1
   - name: Hit
     clip: {fileID: 8300000, guid: 29c3ba37348d3422ca9ebd78641e3ad4, type: 3}
     volume: 1

@@ -130,8 +130,27 @@ public class GridMovement : MonoBehaviour
         float maxX = gridOrigin.x + (gridWidth - 1) * gridSize;
         float minY = gridOrigin.y;
         float maxY = gridOrigin.y + (gridHeight - 1) * gridSize;
-        return (position.x >= minX && position.x <= maxX &&
-                position.y >= minY && position.y <= maxY);
+        
+        // If position is outside grid bounds, it's invalid
+        if (!(position.x >= minX && position.x <= maxX &&
+            position.y >= minY && position.y <= maxY))
+        {
+            return false;
+        }
+        
+        // check if there's a flagged tile at that position
+        Collider2D[] colliders = Physics2D.OverlapPointAll(position);
+        foreach (Collider2D collider in colliders)
+        {
+            Tile tile = collider.GetComponent<Tile>();
+            if (tile != null && tile.flagged)
+            {
+                return false;
+            }
+        }
+        
+        // Position is valid (within grid bounds and no flagged tiles)
+        return true;
     }
 
     private IEnumerator MovePlayer(Vector2 direction)
