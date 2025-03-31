@@ -20,23 +20,55 @@ public class Tile : MonoBehaviour
     public bool isMine = false;
     public int mineCount = 0;
     public bool isWinner = false;
+    private static bool isFollowCameraActive = true;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnMouseOver(){
-        if (active) {
-            if (Input.GetMouseButtonDown(1)) {
-                flagged = !flagged;
-                if (flagged) {
-                    spriteRenderer.sprite = FlaggedTile;
-                } else {
-                    spriteRenderer.sprite = unclickedTile;
-                }
+    private void Update()
+{
+    // when the follow camera is NOT active
+    if (!isFollowCameraActive && active)
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+            Bounds tileBounds = GetComponent<Collider2D>().bounds;
+            if (tileBounds.Contains(mousePosition))
+            {
+                ToggleFlag();
+                Debug.Log("Flag toggled from main camera view");
             }
         }
+    }
+}
+
+    private void OnMouseOver(){
+        if (active && isFollowCameraActive) {
+            if (Input.GetMouseButtonDown(1)) {
+                ToggleFlag();
+            }
+        }
+    }
+
+    public void ToggleFlag() 
+    {
+        if (active) {
+            flagged = !flagged;
+            if (flagged) {
+                spriteRenderer.sprite = FlaggedTile;
+            } else {
+                spriteRenderer.sprite = unclickedTile;
+            }
+        }
+    }
+
+    public static void SetActiveCamera(bool isFollowCamera)
+    {
+        isFollowCameraActive = isFollowCamera;
     }
 
     public void ClickedTile(bool forceReveal = false) {

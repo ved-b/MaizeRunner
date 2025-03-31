@@ -25,34 +25,38 @@ public class CameraZoom : SingletonMonoBehavior<CameraZoom>
     }
     
     public void SwitchCamera()
+{
+    if (followCamera == null || mainCamera == null)
     {
-        if (followCamera == null || mainCamera == null)
-        {
-            Debug.LogError("Camera references not set in the Inspector");
-            return;
-        }
-        
-        if (isUsingFollowCamera)
-        {
-            // Switch to main camera
-            followCamera.Priority = 0;
-            mainCamera.Priority = 10;
-            Debug.Log("Switched to Main Camera");
-            CameraShake.Instance.SetActiveCamera(mainCamera.transform);
-            FadeCanvas(inGameCanvas, 0.25f, fadeSpeed);
-        }
-        else
-        {
-            // Switch to follow camera
-            followCamera.Priority = 10;
-            mainCamera.Priority = 0;
-            Debug.Log("Switched to Follow Camera");
-            CameraShake.Instance.SetActiveCamera(followCamera.transform);
-            FadeCanvas(inGameCanvas, 1f, fadeSpeed);
-        }
-        
-        isUsingFollowCamera = !isUsingFollowCamera;
+        Debug.LogError("Camera references not set in the Inspector");
+        return;
     }
+    
+    if (isUsingFollowCamera)
+    {
+        // Switch to main camera
+        followCamera.Priority = 0;
+        mainCamera.Priority = 10;
+        Debug.Log("Switched to Main Camera");
+        CameraShake.Instance.SetActiveCamera(mainCamera.transform);
+        FadeCanvas(inGameCanvas, 0.25f, fadeSpeed);
+        
+        Tile.SetActiveCamera(false);
+    }
+    else
+    {
+        // Switch to follow camera
+        followCamera.Priority = 10;
+        mainCamera.Priority = 0;
+        Debug.Log("Switched to Follow Camera");
+        CameraShake.Instance.SetActiveCamera(followCamera.transform);
+        FadeCanvas(inGameCanvas, 1f, fadeSpeed);
+        
+        Tile.SetActiveCamera(true);
+    }
+    
+    isUsingFollowCamera = !isUsingFollowCamera;
+}
 
     public void FadeCanvas(CanvasGroup canvasGroup, float targetAlpha, float duration)
     {
