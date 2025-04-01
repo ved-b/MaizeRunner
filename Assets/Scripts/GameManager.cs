@@ -56,13 +56,13 @@ public class GameManager : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                CreateGameBoard(10, 8, 10);
+                CreateGameBoard(10, 8, 20);
                 break;
             case Difficulty.Medium:
-                CreateGameBoard(16, 14, 30);
+                CreateGameBoard(16, 14, 50);
                 break;
             case Difficulty.Hard:
-                CreateGameBoard(24, 22, 80);
+                CreateGameBoard(24, 22, 100);
                 break;
         }
 
